@@ -1,0 +1,4 @@
+{
+  "MONGO_SRV": "mongodb+srv://anyfin:anyfintest@anyfin-fiv3t.mongodb.net/test?retryWrites=true&w=majority",
+  "jwtSecret": "anyfin_jwtSecret"
+}

@@ -1,10 +1,11 @@
+const DB = require("./utils/connectDb");
 const express = require('express');
 const path = require('path');
 const logger = require('morgan');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
-
-const index = require('./routes/index');
+const userRoute = require('./routes/users');
+const authRoute = require('./routes/auth');
 
 const app = express();
 
@@ -16,11 +17,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'build')));
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+DB.connect();
 
-app.use('/api', index);
+app.use('/api/users', userRoute);
+app.use('/api/auth', authRoute);
 app.get('*', (req, res) => {
   res.sendFile('build/index.html', { root: global });
 });
