@@ -1,15 +1,16 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   Button,
   Form,
   FormGroup,
   Label,
-  Input
+  Input, Alert
 } from 'reactstrap';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {register} from '../../actions/authActions';
 import {clearErrors} from '../../actions/errorActions';
+import {useHistory} from "react-router";
 
 const INITIAL_USER = {
   name: "",
@@ -19,6 +20,22 @@ const INITIAL_USER = {
 
 const Register = (props) => {
   const [user, setUser] = useState(INITIAL_USER);
+  const [msg, setMsg] = useState(null);
+  const { error , isAuthenticated} = props;
+  const history = useHistory();
+
+  useEffect(() => {
+    if(error){
+      if (error.id === 'REGISTER_FAIL') {
+        setMsg(error.msg.msg);
+      } else {
+        setMsg(null);
+      }
+    }
+    if(isAuthenticated){
+      history.push("/dashboard")
+    }
+  },[error, isAuthenticated]);
 
   function handleChange(event) {
     const {name, value} = event.target;
@@ -33,6 +50,9 @@ const Register = (props) => {
 
   return (
       <div className="login-form">
+        {msg ? (
+            <Alert color='danger'>{msg}</Alert>
+        ) : null}
         <Form onSubmit={onSubmit}>
           <FormGroup>
 

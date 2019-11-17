@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import { useHistory } from "react-router-dom";
 import {
     Button,
     Form,
     FormGroup,
     Label,
-    Input
+    Input,
+    Alert
 } from 'reactstrap';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
@@ -13,11 +15,27 @@ import {clearErrors} from '../../actions/errorActions';
 
 const INITIAL_USER = {
     email: "",
-    password: ""
+    password: "",
 };
 
 const Login = (props) => {
     const [user, setUser] = useState(INITIAL_USER);
+    const [msg, setMsg] = useState(null);
+    const history = useHistory();
+    const { error , isAuthenticated} = props;
+
+    useEffect(() => {
+        if(error){
+            if (error.id === 'LOGIN_FAIL') {
+                setMsg(error.msg.msg);
+            } else {
+                setMsg(null);
+            }
+        }
+        if(isAuthenticated){
+            history.push("/dashboard")
+        }
+    },[error, isAuthenticated]);
 
     function handleChange(event) {
         const {name, value} = event.target;
@@ -27,12 +45,14 @@ const Login = (props) => {
     const onSubmit = e => {
         e.preventDefault();
         const { login } = props;
-        login(user);
-        window.location.href = "/dashboard"
+        login(user)
     };
 
     return (
         <div className="login-form">
+            {msg ? (
+                <Alert color='danger'>{msg}</Alert>
+            ) : null}
             <Form onSubmit={onSubmit}>
                 <FormGroup>
                     <Label for='email'>Email</Label>

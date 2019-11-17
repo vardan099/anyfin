@@ -49,6 +49,7 @@ const AppNavBar = (props) => {
     const toggle = () => {
         setIsOpen(!isOpen)
     };
+
     return (
         <div>
             <Navbar color='dark' dark expand='sm' className='mb-5'>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import Login from "./components/auth/Login";
 import Register from "./components/auth/Register";
@@ -6,10 +6,16 @@ import AppNavBar from "./components/AppNavBar"
 import Dashboard from "./components/Dashboard"
 import { Provider } from 'react-redux';
 import store from './store';
+import { loadUser } from './actions/authActions';
 
 import "./App.css"
 
 function App() {
+
+    useEffect(() => {
+        store.dispatch(loadUser());
+    },[]);
+
     return (
         <Provider store={store}>
             <div className="App">

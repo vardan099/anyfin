@@ -3,11 +3,14 @@ import { NavLink } from 'reactstrap';
 import { connect } from 'react-redux';
 import { logout } from '../../actions/authActions';
 import PropTypes from 'prop-types';
+import { useHistory } from "react-router-dom";
 
 const Logout = (props) => {
+    const history = useHistory();
     const handleLogout = () =>{
       const {logout} = props;
-      logout()
+      logout();
+      history.push('/login')
     };
     return (
         <>
