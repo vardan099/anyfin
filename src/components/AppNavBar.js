@@ -17,9 +17,9 @@ const authLinks = (user) => {
     return (
         <>
             <NavItem>
-          <span className='navbar-text mr-3'>
-            <strong>{user ? `Welcome ${user.name}` : ''}</strong>
-          </span>
+              <span className='navbar-text mr-3'>
+                <strong>{user ? `Welcome ${user.name}` : ''}</strong>
+              </span>
             </NavItem>
             <NavItem>
                 <Logout/>
