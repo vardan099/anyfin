@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const auth = require('../middleware/auth');
+const CountriesController = require('../controllers/CountriesController');
 
 // Country Model
 const Country = require('../models/Country');
@@ -9,10 +10,7 @@ const Country = require('../models/Country');
 // @route   GET api/items
 // @desc    Get All Items
 // @access  Public
-router.get('/:name',auth, (req, res) => {
-  const name = req.params.name;
-  res.json(name);
-});
+router.get('/:name',auth, CountriesController.getCountriesByName);
 
 // @route   POST api/items
 // @desc    Create An Item
