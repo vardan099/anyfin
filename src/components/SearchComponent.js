@@ -9,14 +9,15 @@ const SearchComponent = ({buttonClickCallback}) => {
         setQuery(event.target.value)
     };
 
-    const handleButtonClick = ()=>{
+    const handleSubmit = (e)=>{
+        e.preventDefault();
         if(query){
             buttonClickCallback(query)
         }
-    }
+    };
 
     return (
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <Row>
                 <Col xs="10">
                     <Input
@@ -29,7 +30,7 @@ const SearchComponent = ({buttonClickCallback}) => {
                     />
                 </Col>
                 <Col xs="2">
-                    <Button color='dark' block onClick={handleButtonClick}>
+                    <Button color='dark' block>
                         Search
                     </Button>
                 </Col>

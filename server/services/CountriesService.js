@@ -1,4 +1,3 @@
-let _ = require('lodash');
 let request = require('request');
 
 class CountriesService {
