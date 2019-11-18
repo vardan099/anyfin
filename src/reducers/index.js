@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
+import countryReducer from './countryReducer';
 import errorReducer from './errorReducer';
 import authReducer from './authReducer';
-import countryReducer from './countryReducer';
 
 export default combineReducers({
-  error: errorReducer,
-  auth: authReducer,
   country: countryReducer,
+  error: errorReducer,
+  auth: authReducer
 });

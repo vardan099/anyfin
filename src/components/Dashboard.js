@@ -2,14 +2,19 @@ import React, {useState} from 'react';
 import {Container} from "reactstrap"
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import SearchComponent from "./SearchComponent"
+import SearchComponent from "./SearchComponent";
+import { getCountriesByName } from '../actions/countryActions';
 
-const handleSearchInputChange = (event) => {
-    const query = event.target.value;
-    console.log(query)
-};
 
-const Dashboard = () =>{
+
+const Dashboard = (props) =>{
+    const handleSearchInputChange = (event) => {
+        const query = event.target.value;
+        const { getCountriesByName } = props;
+        if(query){
+            getCountriesByName(query);
+        }
+    };
   return(
       <Container>
           <SearchComponent inputChangeCallback={handleSearchInputChange}/>
@@ -27,5 +32,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    null
+    {getCountriesByName}
 )(Dashboard);

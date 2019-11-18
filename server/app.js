@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const userRoute = require('./routes/users');
 const authRoute = require('./routes/auth');
+const countriesRoute = require('./routes/countries');
 
 const app = express();
 
@@ -21,6 +22,7 @@ DB.connect();
 
 app.use('/api/users', userRoute);
 app.use('/api/auth', authRoute);
+app.use('/api/countries', countriesRoute);
 app.get('*', (req, res) => {
   res.sendFile('build/index.html', { root: global });
 });
