@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Container} from "reactstrap"
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import SearchComponent from "./SearchComponent";
+import CountriesList from "./CountriesList";
 import {getCountriesByName} from '../actions/countryActions';
 
 
@@ -11,6 +12,7 @@ const Dashboard = (props) => {
     return (
         <Container>
             <SearchComponent buttonClickCallback={getCountriesByName}/>
+            <CountriesList/>
         </Container>
     )
 };
@@ -18,7 +20,7 @@ const Dashboard = (props) => {
 Dashboard.propTypes = {};
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
 });
 
 export default connect(

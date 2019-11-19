@@ -35,7 +35,7 @@ const Login = (props) => {
         if(isAuthenticated){
             history.push("/dashboard")
         }
-    },[error, isAuthenticated]);
+    },[error, isAuthenticated, history]);
 
     function handleChange(event) {
         const {name, value} = event.target;
