@@ -10,14 +10,8 @@ class CountriesController {
             const { name } = req.params;
             let newCountries = [];
             const countries = await CountriesService.findByName(name);
-            if(countries.length > 0 ){
-                let currencies = 'SEK';
-                countries.forEach(country => {
-                    country.currencies.forEach(currency=>{
-                        currencies+=", "+currency.code;
-                    })
-                });
-                const latest = await fixer.latest({ symbols: currencies });
+            if( countries.length > 0 ){
+                const latest = await fixer.latest();
                 const rates = JSON.parse(JSON.stringify(latest.rates));
                 countries.forEach(country => {
                     let exchange = [];
