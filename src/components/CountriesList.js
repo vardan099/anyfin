@@ -4,11 +4,10 @@ import { Table } from 'reactstrap';
 
 const CountriesList = (props) => {
     const {countries} = props;
-
     return (
         <div>
             {
-                countries.length > 0 &&
+                countries.length > 0 ?
                 <Table>
                     <thead>
                     <tr>
@@ -24,14 +23,23 @@ const CountriesList = (props) => {
                             <td>{country.name}</td>
                             <td>{country.population}</td>
                             <td>{country.currencies.map((currency)=>(
-                                <span key={currency.code}>{ currency.code }</span>
+                                <>
+                                <span key={currency.code}> { currency.code }</span><br/>
+                                </>
                             ))}</td>
-                            <td>0</td>
+                            <td>
+                                {country.exchange.map((rate) => (
+                                    <>
+                                    <span key={rate.code}> 1 SEK = {`${rate.exchange} ${rate.code}`} </span><br/>
+                                    </>
+                                ))}
+                            </td>
                         </tr>
                     ))}
 
                     </tbody>
-                </Table>
+                </Table>: <p className="text-info text-center">There is no results to show</p>
+
             }
         </div>
     )

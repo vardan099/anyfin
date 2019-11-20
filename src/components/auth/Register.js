@@ -33,7 +33,7 @@ const Register = (props) => {
       }
     }
     if(isAuthenticated){
-      history.push("/dashboard")
+      history.push("/")
     }
   },[error, isAuthenticated, history]);
 

@@ -22,7 +22,8 @@ const Login = (props) => {
     const [user, setUser] = useState(INITIAL_USER);
     const [msg, setMsg] = useState(null);
     const history = useHistory();
-    const { error , isAuthenticated} = props;
+    const { error , isAuthenticated, isLoading} = props;
+    console.log(isLoading);
 
     useEffect(() => {
         if(error){
@@ -32,10 +33,10 @@ const Login = (props) => {
                 setMsg(null);
             }
         }
-        if(isAuthenticated){
-            history.push("/dashboard")
+        if(isAuthenticated && !isLoading){
+            history.push("/")
         }
-    },[error, isAuthenticated, history]);
+    },[error, isAuthenticated, history, isLoading]);
 
     function handleChange(event) {
         const {name, value} = event.target;
@@ -92,6 +93,7 @@ Login.propTypes = {
 
 const mapStateToProps = state => ({
     isAuthenticated: state.auth.isAuthenticated,
+    isLoading: state.auth.isLoading,
     error: state.error
 });
 
